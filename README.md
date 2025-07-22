@@ -39,43 +39,23 @@ The output is styled using `span` elements with `data-furi` attributes, allowing
 ```
 
 The output text looks the same as using ruby, but only the main text gets selected:
-<img width="445" height="73" alt="imatge" src="https://github.com/user-attachments/assets/d8c2f28a-2730-4f39-b494-059a00e80a26" />
+<img width="445" height="73" alt="imatge" src="https://github.com/user-attachments/assets/d8c2f28a-2730-4f39-b494-059a00e80a26" /><br>
+
 Easy to copy/paste text into your dictionary of choice.
 
 Feel free to wrap your text in any style, and it should preserve it on the final output, such as:
 
 ```html
 <span class="furigana-container">
-  <h1>お<ruby>姉<rt>ねえ</rt></ruby>さんは<ruby>背<rt>せ</rt></ruby>が<ruby>高<rt>たか</rt></ruby>いですね。</a1>
+  <h1>お<ruby>姉<rt>ねえ</rt></ruby>さんは<ruby>背<rt>せ</rt></ruby>が<ruby>高<rt>たか</rt></ruby>いですね。</h1>
 </span>
-```
-
----
-
-## 🎨 Styling (CSS Example)
-
-```css
-.word {
-  position: relative;
-  display: inline-block;
-}
-
-.word::before {
-  content: attr(data-furi);
-  position: absolute;
-  top: -1.2em;
-  font-size: 0.6em;
-  white-space: nowrap;
-  left: 50%;
-  transform: translateX(-50%);
-}
 ```
 
 ---
 
 ## 📜 License
 
-This project is licensed under the [MIT License](TBA).  
+This project is licensed under the [MIT License](LICENSE)).  
 You are free to **use**, **modify**, and **include** this script in personal or commercial projects. Contributions and adaptations are welcome!
 
 ---
