@@ -23,7 +23,7 @@ The output is styled using `span` elements with `data-furi` attributes, allowing
 ### Input
 
 ```html
-<span class="furigana-text">
+<span class="furigana-container">
   お<ruby>姉<rt>ねえ</rt></ruby>さんは 背[せ]が 高[たか]いですね。
 </span>
 ```
@@ -31,12 +31,16 @@ The output is styled using `span` elements with `data-furi` attributes, allowing
 ### Output (automatically generated and replaced by the original)
 
 ```html
-<span class="furigana-text">
+<span class="furigana-container">
   <span class="word" data-furi="ねえ">姉</span>さんは
   <span class="word" data-furi="せ">背</span>が
   <span class="word" data-furi="たか">高</span>いですね。
 </span>
 ```
+
+The output text looks the same as using ruby, but only the main text gets selected:
+<img width="445" height="73" alt="imatge" src="https://github.com/user-attachments/assets/d8c2f28a-2730-4f39-b494-059a00e80a26" />
+Easy to copy/paste text into your dictionary of choice.
 
 Feel free to wrap your text in any style, and it should preserve it on the final output, such as:
 
