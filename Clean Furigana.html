@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Clean furigana</title>
+    <style>
+		body {
+			background-color: #000;
+			color: #fff;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size: 18px;
+			line-height: 1.6;
+			margin: 40px;
+		}
+
+		h1 {
+			font-family: 'Noto Serif JP', serif;
+			font-size: 20px;
+			color: #ffffff;
+			margin-top: 1.5em;
+			margin-bottom: 0.5em;
+		}
+
+		.furigana-container {
+			line-height: 1.6;
+			white-space: normal;
+			word-break: keep-all;
+		}
+
+		.word {
+			all: unset;
+			position: relative;
+			display: inline-block;
+			vertical-align: bottom;
+
+			text-decoration: inherit;
+			font: inherit;
+			font-family: inherit;
+			font-size: inherit;
+			font-style: inherit;
+			font-variant: inherit;
+			font-weight: inherit;
+			letter-spacing: inherit;
+			line-height: inherit;
+			text-align: inherit;
+			text-indent: inherit;
+			text-transform: inherit;
+			text-decoration: inherit;
+			white-space: inherit;
+			word-spacing: inherit;
+			color: inherit;
+			direction: inherit;
+			vertical-align: inherit;
+		}
+
+		.word::before {
+			all: unset;
+			content: attr(data-furi);
+			position: absolute;
+			top: -0.6em; 			/* adjust distance from word */
+			font-size: 0.4em;		/* relative to .word */
+			left: 0;
+			text-align: center;
+			width: 100%;
+			white-space: nowrap;
+			pointer-events: none;
+			user-select: none;
+		  
+		}
+    </style>
+</head>
+<body>
+
+	
+	<br>
+
+	<span class="furigana-container">
+		<h1>お<ruby>姉<rt>ねえ</rt></ruby>さんは<ruby>背<rt>せ</rt></ruby>が<ruby>高<rt>たか</rt></ruby>いですね。</a1>
+	</span>
+	<br>
+	<span class="furigana-container">
+		この Ｔシャツ[ティーしゃつ]は<span class="expression"> 人気[にんき] </span>です。
+	</span>
+
+	
+	<br><br><br>
+	<span class="furigana-container">
+		<span style="font-family: 'Courier New'; font-size: 22px; color: darkblue;">この</span>
+		<span style="font-weight: bold; color: crimson; text-decoration: underline;">テキスト</span>
+		<span style="font-style: italic; background-color: black;">は</span>
+		<span style="color: limegreen; font-size: 24px; text-shadow: 1px 1px 2px black;">Clean Furigana</span>
+		<span style="color: orange; font-weight: bold;">を[を]</span>
+		<span style="font-variant: small-caps; background-color: lightblue;"> 使[つか]っています。</span>
+		<span style="display: inline-block; transform: rotate(-3deg); color: teal;">つまり、</span>
+		<span style="color: orange; font-weight: bold; text-decoration: underline wavy red;">メインの</span>
+		<span style="letter-spacing: 3px; color: darkgreen;"> 単語[たんご]だけを</span>
+		<span style="font-size: 16px;"> 選択[せんたく]しても、</span><span style="font-style: italic; color: gray;">ふりがな</span>
+		<span style="color: hotpink; text-decoration: line-through;">が</span>
+		<span style="transform: rotate(5deg); display: inline-block;"> 選択[せんたく]されません。</span>
+		<span style="background: linear-gradient(to right, #ff9966, #ff5e62); -webkit-background-clip: text; color: transparent;">それは</span>
+		<span style="font-family: 'Arial Black'; font-size: 18px; color: navy;"> 辞書[じしょ]で</span>
+		<span style="font-style: oblique; color: darkred;"> 意味[いみ]を</span>
+		<span style="font-size: 16px; border-bottom: 1px solid black;"> 調[しら]べるときに</span>
+		<span style="font-weight: bold; color: seagreen;"> 便利[べんり]です。</span>
+		It also ignores Romaji text, so spaces don't get removed.
+		<span style="font-size: 24px; text-shadow: 2px 2px 4px gray; color: gold;">とても</span>
+		<span style="transform: scale(1.2); display: inline-block; color: darkmagenta;"> 便利[べんり]</span>
+		<span style="font-style: italic; color: royalblue;">でしょう？</span>
+	</span>
+
+	<script>
+		(function () {
+			const elements = document.querySelectorAll(".furigana-container");
+			if (!elements.length) return;
+
+			elements.forEach(el => {
+				let html = el.innerHTML;
+
+				// Convert ruby tags to span.word format
+				html = html.replace(/<ruby>([^<]+)<rt>([^<]+)<\/rt><\/ruby>/g, (_, base, furi) => {
+					return `<span class="word" data-furi="${furi}">${base}</span>`;
+				});
+
+				// Convert Base[furigana] to span.word format
+				html = html.replace(/([^\[\]\s<>]+)\[([^\[\]]+)\]/g, (_, base, furi) => {
+					return `<span class="word" data-furi="${furi}">${base}</span>`;
+				});
+
+				// Remove spaces between Japanese characters, punctuation, and tags
+				html = html.replace(
+					/([\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}、>])\s+(?=[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}、<])/gu,
+					'$1'
+				);
+
+				el.innerHTML = html;
+		  	});
+		})();
+	</script>
+</body>
+</html>
